@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from album.models import Category,Photo #a  importar category y Photo para las clases
+from album.models import Category,Photo
 from django.views.generic import ListView, DetailView # a
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
@@ -22,15 +22,15 @@ def first_view(request):
 	return render(request,'base.html')
 
 def category(request):
-	category_list=Category.objects.all() #Guarda el contenido del modelo -> Category
+	category_list=Category.objects.all()
 	context={'object_list':category_list}
 	return render(request,'album/category.html',context)
 
-def category_detail(request,category_id):#parametro cate... recibe la llave prim
+def category_detail(request,category_id):
 	category=Category.objects.get(id=category_id)
-	context={'object':category}#para enviar al template se crea un diccionario
+	context={'object':category}
 	return render(request,'album/category_detail.html',context)
-#Herencia clase por defecto de django
+
 class PhotoListView(ListView):
 	model=Photo
 
